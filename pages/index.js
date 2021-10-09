@@ -1,6 +1,25 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import Link from 'next/link'
+import { startClock } from '../store'
+import Examples from '../components/examples'
 
-export default function Home() {
+const StyledParagraph = ({...props}) => {
+  return (
+    <p className="mt-4 text-xl">  
+      {props.children}
+    </p>
+  )
+  
+}
+
+const Index = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(startClock())
+  }, [dispatch])
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Head>
@@ -29,9 +48,9 @@ export default function Home() {
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
           >
             <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
+            <StyledParagraph>
               Find in-depth information about Next.js features and API.
-            </p>
+            </StyledParagraph>
           </a>
 
           <a
@@ -39,9 +58,9 @@ export default function Home() {
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
           >
             <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
+            <StyledParagraph>
               Learn about Next.js in an interactive course with quizzes!
-            </p>
+            </StyledParagraph>
           </a>
 
           <a
@@ -49,9 +68,9 @@ export default function Home() {
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
           >
             <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
+            <StyledParagraph>
               Discover and deploy boilerplate example Next.js projects.
-            </p>
+            </StyledParagraph>
           </a>
 
           <a
@@ -59,11 +78,18 @@ export default function Home() {
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
           >
             <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
+            <StyledParagraph>
               Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
+            </StyledParagraph>
           </a>
         </div>
+
+        <>
+          <Examples />
+          <Link href="/show-redux-state">
+            <a>Click to see current Redux State</a>
+          </Link>
+        </>
       </main>
 
       <footer className="flex items-center justify-center w-full h-24 border-t">
@@ -80,3 +106,5 @@ export default function Home() {
     </div>
   )
 }
+
+export default Index
